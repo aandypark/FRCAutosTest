@@ -5,16 +5,23 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Subsystems.DriveSubsystem;
+import frc.robot.commands.ForwardCmd;
 
 public class RobotContainer {
+  private DriveSubsystem driveSubsystem = new DriveSubsystem();
+  
   public RobotContainer() {
+
     configureBindings();
   }
 
   private void configureBindings() {}
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return new SequentialCommandGroup(
+      new ForwardCmd(driveSubsystem, 1.5)
+    );
   }
 }
